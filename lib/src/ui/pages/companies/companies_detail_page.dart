@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:trucko/src/core/constants/assets/assets.dart';
 import 'package:trucko/src/core/routing/screen_argumentos.dart';
 import 'package:trucko/src/core/theme/theme.dart';
-import 'package:trucko/src/ui/widgets/tab_bar/bottom_tab_bar_controller.dart';
 import 'package:trucko/src/ui/widgets/widgets.dart';
 
 class CompaniesDetailPage extends StatefulWidget {
@@ -87,15 +87,15 @@ class _CompaniesDetailPageState extends State<CompaniesDetailPage> {
                 "O Ministério da Saúde incluiu caminhoneiros, motoristas de transportes coletivo e trabalhadores portuários na segunda fase da Campanha Nacional de Vacinação contra a Gripe, que começa no dia 16 de abril. As três categorias se juntam ao grupo prioritário que também contempla doentes crônicos e profissionais das forças de segurança e salvamento. O anúncio da inclusão dos caminhoneiros, motoristas de transporte coletivo e portuários foi feito na última segunda-feira (30/3) pelos ministros da Saúde, Luiz Henrique Mandetta, e da Infraestrutura, Tarcísio Gomes de Freitas.",
             "information": [
               {
-                "icon": "",
+                "icon": iconLocationBlue,
                 "label": "Dirija até um posto de vacinação",
               },
               {
-                "icon": "",
+                "icon": iconOk,
                 "label": "Tome a vacina do COVID-19",
               },
               {
-                "icon": "",
+                "icon": iconGiftRed,
                 "label": "Ganhe 50 pontos",
               },
             ]
@@ -113,15 +113,15 @@ class _CompaniesDetailPageState extends State<CompaniesDetailPage> {
                 "Na compra de um café Nespresso, nossos queridos caminhoneiros compram um salgado de sua preferência pela METADE do preço e ainda ganham 30 pontos no aplicativo! Na compra de um café Nespresso, nossos queridos caminhoneiros compram um salgado de sua preferência pela METADE do preço e ainda ganham 30 pontos no aplicativo!",
             "information": [
               {
-                "icon": "",
+                "icon": iconLocationBlue,
                 "label": "Dirija até um Posto Ipiranga",
               },
               {
-                "icon": "",
+                "icon": iconOk,
                 "label": "Compre um combo café expresso + pão de queijo",
               },
               {
-                "icon": "",
+                "icon": iconGiftRed,
                 "label": "Ganhe 50 pontos",
               },
             ]
@@ -180,6 +180,7 @@ class _CompaniesDetailPageState extends State<CompaniesDetailPage> {
                   _buildLocalName(),
                   _buildAlertTruckersAround(count: 327),
                   _buildTruckersAroundList(truckersAround),
+                  _buildInformationBoxList(),
                   _buildAboutCampaign(),
                 ],
               ),
@@ -319,4 +320,36 @@ class _CompaniesDetailPageState extends State<CompaniesDetailPage> {
           ],
         ),
       );
+
+  Widget _buildInformationBoxList() {
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      itemCount: campaign[0]["information"].length,
+      itemBuilder: (BuildContext context, int index) {
+        final camp = campaign[0]["information"].elementAt(index);
+        return _buildInformationBoxListItem(
+            camp, campaign[0]["information"], index);
+      },
+    );
+  }
+
+  Widget _buildInformationBoxListItem(
+    Map<String, dynamic> camp,
+    List<Map<String, dynamic>> campaign,
+    int index,
+  ) {
+    final bool isTheFirstPositionOfArray = index == 0;
+    return Padding(
+      padding: EdgeInsets.only(
+        left: Spacing.mms,
+        top: isTheFirstPositionOfArray ? 0.0 : Spacing.ms,
+        right: Spacing.mms,
+      ),
+      child: InformationBox(
+        label: camp["label"],
+        iconLeft: camp["icon"],
+      ),
+    );
+  }
 }

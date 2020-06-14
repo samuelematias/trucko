@@ -334,7 +334,7 @@ class _LocalDetailPageState extends State<LocalDetailPage> {
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                 ),
                 child: Image(
-                  image: AssetImage(iconLocation),
+                  image: AssetImage(iconLocationGreen),
                   alignment: Alignment.center,
                 ),
               ),
