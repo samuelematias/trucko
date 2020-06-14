@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trucko/src/core/theme/theme.dart';
-import 'package:trucko/src/widgets/widgets.dart';
+import 'package:trucko/src/ui/widgets/widgets.dart';
 
 void main() {
   runApp(MyApp());

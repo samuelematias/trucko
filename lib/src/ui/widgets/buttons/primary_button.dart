@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trucko/src/core/theme/theme.dart';
-import 'package:trucko/src/widgets/loading/custom_progress_indicator.dart';
+import 'package:trucko/src/ui/widgets/loading/custom_progress_indicator.dart';
 
 class PrimaryButton extends StatelessWidget {
   final String label;
