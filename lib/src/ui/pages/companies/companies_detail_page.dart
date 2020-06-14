@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:trucko/src/core/constants/assets/assets.dart';
-import 'package:trucko/src/core/routing/routes.dart';
 import 'package:trucko/src/core/theme/theme.dart';
+import 'package:trucko/src/ui/widgets/tab_bar/bottom_tab_bar_controller.dart';
 import 'package:trucko/src/ui/widgets/widgets.dart';
 
-class LocalDetailPage extends StatefulWidget {
+class CompaniesDetailPage extends StatefulWidget {
   @override
-  _LocalDetailPageState createState() => _LocalDetailPageState();
+  _CompaniesDetailPageState createState() => _CompaniesDetailPageState();
 }
 
-class _LocalDetailPageState extends State<LocalDetailPage> {
+class _CompaniesDetailPageState extends State<CompaniesDetailPage> {
   final List<Map<String, dynamic>> truckersAround = [
     {
       "name": "Samuel",
@@ -89,8 +90,9 @@ class _LocalDetailPageState extends State<LocalDetailPage> {
               bottom: Spacing.m,
             ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                _buildBackButton(),
                 _buildCloseButton(),
               ],
             ),
@@ -117,8 +119,28 @@ class _LocalDetailPageState extends State<LocalDetailPage> {
     );
   }
 
-  Widget _buildCloseButton() => InkResponse(
+  Widget _buildBackButton() => InkResponse(
         onTap: () => Navigator.pop(context),
+        child: Container(
+          width: 40.0,
+          height: 40.0,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(color: ColorPalette.grey400, width: 1.0),
+          ),
+          child: Icon(Icons.arrow_back, size: 24.0),
+        ),
+      );
+
+  Widget _buildCloseButton() => InkResponse(
+        onTap: () => Navigator.of(
+          context,
+          rootNavigator: true,
+        ).pushAndRemoveUntil(
+          PageTransition(
+              child: BottomTabBarController(), type: PageTransitionType.fade),
+          (Route<dynamic> route) => false,
+        ),
         child: Container(
           width: 40.0,
           height: 40.0,
@@ -276,11 +298,7 @@ class _LocalDetailPageState extends State<LocalDetailPage> {
             padding: EdgeInsets.only(
               top: Spacing.mms,
             ),
-            child: PrimaryButton(
-              label: 'VER MAIS',
-              onPressed: () => Navigator.pushNamed(
-                  context, AppTabNavigatorRoutes.companiesDetail),
-            ),
+            child: PrimaryButton(label: 'VER MAIS', onPressed: () {}),
           )
         ],
       ),

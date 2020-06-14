@@ -5,4 +5,5 @@ class AppTabNavigatorRoutes {
   static const String map = '/map';
   static const String rewards = '/rewards';
   static const String localDetail = '/localDetail';
+  static const String companiesDetail = '/companiesDetail';
 }
