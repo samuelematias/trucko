@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trucko/src/core/constants/assets/images.dart';
 import 'package:trucko/src/core/theme/theme.dart';
+import 'package:trucko/src/ui/widgets/tab_bar/bottom_tab_bar_controller.dart';
 import 'package:trucko/src/ui/widgets/widgets.dart';
 
 class LoginPage extends StatefulWidget {
@@ -30,7 +31,13 @@ class _LoginPageState extends State<LoginPage> {
               Padding(
                 padding: EdgeInsets.symmetric(vertical: Spacing.xl),
                 child: PrimaryButton(
-                    label: 'ENTRAR COM FACEBOOK', onPressed: () {}),
+                  label: 'ENTRAR COM FACEBOOK',
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => BottomTabBarController()),
+                  ),
+                ),
               )
             ],
           ),
