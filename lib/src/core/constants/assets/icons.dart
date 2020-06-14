@@ -7,3 +7,4 @@ const String iconRewardInactive = '${PREFIX}icons/icon-reward-inactive.png';
 const String iconMegaphoneActive = '${PREFIX}icons/icon-megaphone-active.png';
 const String iconMegaphoneInactive =
     '${PREFIX}icons/icon-megaphone-inactive.png';
+const String iconCrown = '${PREFIX}icons/icon-crown.png';
