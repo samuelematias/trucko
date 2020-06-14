@@ -64,12 +64,12 @@ class _LocalDetailPageState extends State<LocalDetailPage> {
     {
       "photo": imgCompanies1,
       "id": "6d579be3-68b8-454f-9a5f-f7b3aaed1a0f",
-      "arguments": arguments1,
+      "arguments": arguments2,
     },
     {
       "photo": imgCompanies2,
       "id": "6d579be3-68b8-454f-9a5f-f7b3aaed1a0a",
-      "arguments": arguments2,
+      "arguments": arguments1,
     },
   ];
 
