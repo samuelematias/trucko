@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trucko/src/core/theme/theme.dart';
+import 'package:trucko/src/widgets/widgets.dart';
 
 void main() {
   runApp(MyApp());
@@ -55,6 +56,22 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: Spacing.ms),
+              child: PrimaryButton(
+                onPressed: () {},
+                label: 'ENTRAR COM FACEBOOK',
+                loading: true,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(Spacing.ms),
+              child: SecondaryButton(
+                onPressed: () {},
+                labelLeft: 'PARTICIPAR',
+                labelRight: '+20 pts',
+              ),
+            )
           ],
         ),
       ),
