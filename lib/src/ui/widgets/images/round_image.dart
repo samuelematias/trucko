@@ -9,6 +9,7 @@ class RoundImage extends StatelessWidget {
   final Color borderColor;
   final double width;
   final double height;
+  final double badgeScale;
   final bool showBadge;
 
   const RoundImage({
@@ -19,6 +20,7 @@ class RoundImage extends StatelessWidget {
     this.widthBorderImage = 2.0,
     this.borderColor = ColorPalette.grey400,
     this.showBadge = false,
+    this.badgeScale = 2,
   }) : super(key: key);
 
   @override
@@ -43,20 +45,16 @@ class RoundImage extends StatelessWidget {
           Visibility(
             visible: showBadge,
             child: Positioned(
-              right: 0,
-              top: 0,
-              child: Container(
-                width: 16.0,
-                height: 16.0,
-                decoration: BoxDecoration(
-                  color: ColorPalette.red50,
-                  shape: BoxShape.circle,
-                ),
-                child: Image(
-                  image: AssetImage(iconCrown),
-                ),
-              ),
-            ),
+                right: 0,
+                top: 0,
+                child: Container(
+                    width: 8.0 * badgeScale,
+                    height: 8.0 * badgeScale,
+                    decoration: BoxDecoration(
+                      color: ColorPalette.red50,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Image(image: AssetImage(iconCrown)))),
           ),
         ],
       );
