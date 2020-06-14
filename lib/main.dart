@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:trucko/src/core/routing/routes.dart';
+import 'package:trucko/src/core/routing/screen_argumentos.dart';
 import 'package:trucko/src/ui/pages/companies/companies_detail_page.dart';
 import 'package:trucko/src/ui/pages/local/local_detail_page.dart';
 import 'package:trucko/src/ui/pages/login/login_page.dart';
@@ -40,8 +41,9 @@ class MyApp extends StatelessWidget {
                 child: LocalDetailPage(), type: PageTransitionType.downToUp);
             break;
           case AppTabNavigatorRoutes.companiesDetail:
+            final CompaniesDetailPageArguments arguments = settings.arguments;
             return PageTransition(
-                child: CompaniesDetailPage(),
+                child: CompaniesDetailPage(arguments: arguments),
                 type: PageTransitionType.downToUp);
             break;
           default:

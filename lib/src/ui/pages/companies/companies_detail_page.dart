@@ -1,16 +1,24 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:trucko/src/core/constants/assets/assets.dart';
+import 'package:trucko/src/core/routing/screen_argumentos.dart';
 import 'package:trucko/src/core/theme/theme.dart';
 import 'package:trucko/src/ui/widgets/tab_bar/bottom_tab_bar_controller.dart';
 import 'package:trucko/src/ui/widgets/widgets.dart';
 
 class CompaniesDetailPage extends StatefulWidget {
+  final CompaniesDetailPageArguments arguments;
+
+  const CompaniesDetailPage({
+    Key key,
+    @required this.arguments,
+  }) : super(key: key);
   @override
   _CompaniesDetailPageState createState() => _CompaniesDetailPageState();
 }
 
 class _CompaniesDetailPageState extends State<CompaniesDetailPage> {
+  List<Map<String, dynamic>> campaign;
   final List<Map<String, dynamic>> truckersAround = [
     {
       "name": "Samuel",
@@ -56,16 +64,78 @@ class _CompaniesDetailPageState extends State<CompaniesDetailPage> {
     },
   ];
 
-  final List<Map<String, dynamic>> companies = [
-    {
-      "photo": imgCompanies1,
-      "id": "6d579be3-68b8-454f-9a5f-f7b3aaed1a0f",
-    },
-    {
-      "photo": imgCompanies2,
-      "id": "6d579be3-68b8-454f-9a5f-f7b3aaed1a0a",
-    },
-  ];
+  // final List<Map<String, dynamic>> campaign = [
+  //   {
+  //     "photo": imgCompanies1,
+  //     "id": "6d579be3-68b8-454f-9a5f-f7b3aaed1a0f",
+  //   },
+  //   {
+  //     "photo": imgCompanies2,
+  //     "id": "6d579be3-68b8-454f-9a5f-f7b3aaed1a0a",
+  //   },
+  // ];
+
+  void _getValues() {
+    if (widget.arguments.value == 1) {
+      setState(() {
+        campaign = [
+          {
+            "photo": "https://i.imgur.com/nsd9N0E.png",
+            "id": "6d579be3-68b8-454f-9a5f-f7b3aaed1a0f",
+            "title": "Campanha de Vacinação COVID-19",
+            "about":
+                "O Ministério da Saúde incluiu caminhoneiros, motoristas de transportes coletivo e trabalhadores portuários na segunda fase da Campanha Nacional de Vacinação contra a Gripe, que começa no dia 16 de abril. As três categorias se juntam ao grupo prioritário que também contempla doentes crônicos e profissionais das forças de segurança e salvamento. O anúncio da inclusão dos caminhoneiros, motoristas de transporte coletivo e portuários foi feito na última segunda-feira (30/3) pelos ministros da Saúde, Luiz Henrique Mandetta, e da Infraestrutura, Tarcísio Gomes de Freitas.",
+            "information": [
+              {
+                "icon": "",
+                "label": "Dirija até um posto de vacinação",
+              },
+              {
+                "icon": "",
+                "label": "Tome a vacina do COVID-19",
+              },
+              {
+                "icon": "",
+                "label": "Ganhe 50 pontos",
+              },
+            ]
+          },
+        ];
+      });
+    } else {
+      setState(() {
+        campaign = [
+          {
+            "photo": "https://i.imgur.com/J6iztQz.png",
+            "id": "6d579be3-68b8-454f-9a5f-f7b3aaed1a0f",
+            "title": "Venha tomar seu cafézinho num posto Ipiranga",
+            "about":
+                "Na compra de um café Nespresso, nossos queridos caminhoneiros compram um salgado de sua preferência pela METADE do preço e ainda ganham 30 pontos no aplicativo! Na compra de um café Nespresso, nossos queridos caminhoneiros compram um salgado de sua preferência pela METADE do preço e ainda ganham 30 pontos no aplicativo!",
+            "information": [
+              {
+                "icon": "",
+                "label": "Dirija até um Posto Ipiranga",
+              },
+              {
+                "icon": "",
+                "label": "Compre um combo café expresso + pão de queijo",
+              },
+              {
+                "icon": "",
+                "label": "Ganhe 50 pontos",
+              },
+            ]
+          },
+        ];
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getValues();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,33 +153,34 @@ class _CompaniesDetailPageState extends State<CompaniesDetailPage> {
             height: 50.0,
             color: ColorPalette.overlay50,
           ),
-          Padding(
-            padding: EdgeInsets.only(
-              top: Spacing.ss,
-              right: Spacing.m,
-              bottom: Spacing.m,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _buildBackButton(),
-                _buildCloseButton(),
-              ],
-            ),
+          Stack(
+            children: <Widget>[
+              _buildLogo(),
+              Padding(
+                padding: EdgeInsets.fromLTRB(
+                  Spacing.m,
+                  Spacing.ss,
+                  Spacing.m,
+                  Spacing.m,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _buildBackButton(),
+                    _buildCloseButton(),
+                  ],
+                ),
+              ),
+            ],
           ),
           Expanded(
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  _buildLogo(),
                   _buildLocalName(),
-                  _buildAlertTruckersAround(count: 4),
+                  _buildAlertTruckersAround(count: 327),
                   _buildTruckersAroundList(truckersAround),
-                  _buildCompanies(),
-                  _buildDivider(),
-                  _buildAddress(),
-                  _buildRatingList(),
-                  _buildButtons(),
+                  _buildAboutCampaign(),
                 ],
               ),
             ),
@@ -125,6 +196,7 @@ class _CompaniesDetailPageState extends State<CompaniesDetailPage> {
           width: 40.0,
           height: 40.0,
           decoration: BoxDecoration(
+            color: ColorPalette.white50,
             shape: BoxShape.circle,
             border: Border.all(color: ColorPalette.grey400, width: 1.0),
           ),
@@ -145,6 +217,7 @@ class _CompaniesDetailPageState extends State<CompaniesDetailPage> {
           width: 40.0,
           height: 40.0,
           decoration: BoxDecoration(
+            color: ColorPalette.white50,
             shape: BoxShape.circle,
             border: Border.all(color: ColorPalette.grey400, width: 1.0),
           ),
@@ -152,11 +225,10 @@ class _CompaniesDetailPageState extends State<CompaniesDetailPage> {
         ),
       );
 
-  Widget _buildLogo() => RoundImage(
-        width: 80.0,
-        height: 80.0,
-        imageUrl:
-            'https://lh3.googleusercontent.com/proxy/udNKxr0AEaZD6qSrZ7HUnYaHRkH7x38boN3Jzfmri851cJvL9B7MguksjBKuoMxZvtvH4GWgpUUXOGohtRnectXLoax1JJbJFNmSJbGW-was',
+  Widget _buildLogo() => Image(
+        image: CachedNetworkImageProvider(
+          '${campaign[0]["photo"]}',
+        ),
       );
 
   Widget _buildLocalName() => Padding(
@@ -167,7 +239,7 @@ class _CompaniesDetailPageState extends State<CompaniesDetailPage> {
           Spacing.m,
         ),
         child: Text(
-          'Loja de Conveniência AM/PM Serra Talhada',
+          '${campaign[0]["title"]}',
           textAlign: TextAlign.center,
         ).h1(),
       );
@@ -226,7 +298,7 @@ class _CompaniesDetailPageState extends State<CompaniesDetailPage> {
               right: isTheLastPositionOfArray ? Spacing.l : Spacing.s,
             ),
             child: More(
-              count: '2',
+              count: '320',
             ),
           ),
         )
@@ -234,268 +306,15 @@ class _CompaniesDetailPageState extends State<CompaniesDetailPage> {
     );
   }
 
-  Widget _buildCompanies() => Column(
-        children: <Widget>[
-          Container(
-            alignment: Alignment.centerLeft,
-            padding: EdgeInsets.fromLTRB(
-              Spacing.mms,
-              Spacing.mms,
-              Spacing.mms,
-              Spacing.m,
-            ),
-            child: Text(
-              'Campanhas ativas',
-              textAlign: TextAlign.left,
-            ).h2(),
-          ),
-          Row(
-            children: [
-              _buildCompaniesList(),
-            ],
-          ),
-        ],
-      );
-
-  Widget _buildCompaniesList() => Container(
-        height: 220.0,
-        child: ListView.builder(
-          shrinkWrap: true,
-          scrollDirection: Axis.horizontal,
-          itemCount: companies.length,
-          itemBuilder: (BuildContext context, int index) {
-            final companie = companies.elementAt(index);
-            return Container(
-                alignment: Alignment.centerLeft,
-                child: _buildCompaniesListItem(companie, companies, index));
-          },
-        ),
-      );
-
-  Widget _buildCompaniesListItem(
-    Map<String, dynamic> companie,
-    List<Map<String, dynamic>> companies,
-    int index,
-  ) {
-    final bool isTheFirstPositionOfArray = index == 0;
-    final bool isTheLastPositionOfArray = index + 1 == companies.length;
-    return Padding(
-      padding: EdgeInsets.only(
-        left: isTheFirstPositionOfArray ? Spacing.l : 0.0,
-        right: isTheLastPositionOfArray ? Spacing.l : Spacing.m,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            child: Image(
-              image: AssetImage(companie['photo']),
-            ),
-          ),
-          Container(
-            width: 140.0,
-            padding: EdgeInsets.only(
-              top: Spacing.mms,
-            ),
-            child: PrimaryButton(label: 'VER MAIS', onPressed: () {}),
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget _buildDivider() => Padding(
-        padding: EdgeInsets.fromLTRB(
-          Spacing.mms,
-          Spacing.l,
-          Spacing.mms,
-          Spacing.mms,
-        ),
-        child: Divider(
-          color: ColorPalette.grey400,
-          height: 1.0,
-          thickness: 1.0,
-        ),
-      );
-
-  Widget _buildAddress() => Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: Spacing.mms,
-        ),
+  Widget _buildAboutCampaign() => Padding(
+        padding:
+            EdgeInsets.fromLTRB(Spacing.ms, Spacing.l, Spacing.ms, Spacing.lls),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
+          children: [
             Flexible(
               child: Text(
-                      'Av. Visc. de Albuquerque, 964 - Madalena, Recife - PE, 50610-090')
-                  .p2(color: ColorPalette.grey100),
-            ),
-            InkResponse(
-              onTap: () {},
-              child: Container(
-                width: 48.0,
-                height: 48.0,
-                decoration: BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  border: Border.all(color: ColorPalette.green50, width: 2),
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                ),
-                child: Image(
-                  image: AssetImage(iconLocation),
-                  alignment: Alignment.center,
-                ),
-              ),
-            ),
-          ],
-        ),
-      );
-
-  Widget _buildRatingList() => Padding(
-        padding: EdgeInsets.all(Spacing.mms),
-        child: Column(
-          children: <Widget>[
-            _buildRatingFood(),
-            _buildRatingBathroom(),
-            _buildRatingParking(),
-          ],
-        ),
-      );
-
-  Widget _buildRatingFood() => Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Text(
-            'Comida',
-          ).p2(color: ColorPalette.grey200),
-          Row(
-            children: <Widget>[
-              Icon(
-                Icons.star,
-                color: ColorPalette.red50,
-                size: 12,
-              ),
-              Icon(
-                Icons.star,
-                color: ColorPalette.red50,
-                size: 12,
-              ),
-              Icon(
-                Icons.star,
-                color: ColorPalette.red50,
-                size: 12,
-              ),
-              Icon(
-                Icons.star,
-                color: ColorPalette.red50,
-                size: 12,
-              ),
-              Icon(
-                Icons.star,
-                color: ColorPalette.red50,
-                size: 12,
-              ),
-            ],
-          )
-        ],
-      );
-
-  Widget _buildRatingBathroom() => Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Text(
-            'Banheiro',
-          ).p2(color: ColorPalette.grey200),
-          Row(
-            children: <Widget>[
-              Icon(
-                Icons.star,
-                color: ColorPalette.red50,
-                size: 12,
-              ),
-              Icon(
-                Icons.star,
-                color: ColorPalette.red50,
-                size: 12,
-              ),
-              Icon(
-                Icons.star,
-                color: ColorPalette.grey400,
-                size: 12,
-              ),
-              Icon(
-                Icons.star,
-                color: ColorPalette.grey400,
-                size: 12,
-              ),
-              Icon(
-                Icons.star,
-                color: ColorPalette.grey400,
-                size: 12,
-              ),
-            ],
-          )
-        ],
-      );
-
-  Widget _buildRatingParking() => Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Text(
-            'Estacionamento',
-          ).p2(color: ColorPalette.grey200),
-          Row(
-            children: <Widget>[
-              Icon(
-                Icons.star,
-                color: ColorPalette.red50,
-                size: 12,
-              ),
-              Icon(
-                Icons.star,
-                color: ColorPalette.red50,
-                size: 12,
-              ),
-              Icon(
-                Icons.star,
-                color: ColorPalette.grey400,
-                size: 12,
-              ),
-              Icon(
-                Icons.star,
-                color: ColorPalette.grey400,
-                size: 12,
-              ),
-              Icon(
-                Icons.star,
-                color: ColorPalette.grey400,
-                size: 12,
-              ),
-            ],
-          )
-        ],
-      );
-
-  Widget _buildButtons() => Padding(
-        padding: EdgeInsets.only(
-          left: Spacing.mms,
-          right: Spacing.mms,
-          bottom: Spacing.mms,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            InkResponse(
-              onTap: () {},
-              child: Text(
-                'Ver mais',
-              ).p2(color: ColorPalette.green50, fontWeight: FontWeight.bold),
-            ),
-            InkResponse(
-              onTap: () {},
-              child: Text(
-                'Avalidar',
-              ).p2(color: ColorPalette.green50, fontWeight: FontWeight.bold),
+                '${campaign[0]["about"]}',
+              ).p2(color: ColorPalette.grey100),
             ),
           ],
         ),
