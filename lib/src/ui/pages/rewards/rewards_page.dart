@@ -90,12 +90,13 @@ class _RewardsPageState extends State<RewardsPage> {
   }
 
   Widget _buildRewardsTitle() => Container(
-      margin: const EdgeInsets.only(top: Spacing.l),
-      alignment: Alignment.centerLeft,
-      child: Text(
-        "Benefícios disponíveis",
-        textAlign: TextAlign.left,
-      ).h2(color: ColorPalette.black100));
+        margin: const EdgeInsets.only(top: Spacing.l),
+        alignment: Alignment.centerLeft,
+        child: Text(
+          "Benefícios disponíveis",
+          textAlign: TextAlign.left,
+        ).h2(color: ColorPalette.black100),
+      );
 
   Widget _buildCompanies(Map<String, dynamic> rewards) => Column(
         children: <Widget>[
@@ -189,22 +190,24 @@ class _RewardsPageState extends State<RewardsPage> {
   Widget _whatsContainer() => Row(
         children: [
           Expanded(
-              flex: 1,
-              child: Container(
-                  padding: const EdgeInsets.all(Spacing.m),
-                  margin: const EdgeInsets.only(top: Spacing.m),
-                  decoration: BoxDecoration(
-                      color: ColorPalette.grey50,
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.all(Radius.circular(8))),
-                  child: Column(
-                    children: [
-                      Text(
-                        "Convide seus amigos caminhoneiros e ganhe muitos pontos!",
-                        textAlign: TextAlign.left,
-                      ).p1(color: ColorPalette.black100)
-                    ],
-                  ))),
+            flex: 1,
+            child: Container(
+              padding: const EdgeInsets.all(Spacing.m),
+              margin: const EdgeInsets.only(top: Spacing.m),
+              decoration: BoxDecoration(
+                  color: ColorPalette.grey50,
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.all(Radius.circular(8))),
+              child: Column(
+                children: [
+                  Text(
+                    "Convide seus amigos caminhoneiros e ganhe muitos pontos!",
+                    textAlign: TextAlign.left,
+                  ).p1(color: ColorPalette.black100)
+                ],
+              ),
+            ),
+          ),
         ],
       );
 
