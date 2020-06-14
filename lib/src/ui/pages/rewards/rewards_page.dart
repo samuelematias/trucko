@@ -204,12 +204,16 @@ class _RewardsPageState extends State<RewardsPage> {
                   color: ColorPalette.grey50,
                   shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.all(Radius.circular(8))),
-              child: Column(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "Convide seus amigos caminhoneiros e ganhe muitos pontos!",
-                    textAlign: TextAlign.left,
-                  ).p1(color: ColorPalette.black100),
+                  Flexible(
+                    child: Text(
+                      "Convide seus amigos caminhoneiros e ganhe muitos pontos!",
+                      textAlign: TextAlign.left,
+                    ).p1(color: ColorPalette.black100),
+                  ),
+                  Image(image: AssetImage(iconWhatsapp))
                 ],
               ),
             ),
