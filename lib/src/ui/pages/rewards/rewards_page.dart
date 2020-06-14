@@ -95,7 +95,7 @@ class _RewardsPageState extends State<RewardsPage> {
   }
 
   Widget _buildRewardsTitle() => Container(
-        margin: const EdgeInsets.only(top: Spacing.l),
+        margin: EdgeInsets.only(top: Spacing.l),
         alignment: Alignment.centerLeft,
         child: Text(
           "Benefícios disponíveis",
@@ -198,8 +198,8 @@ class _RewardsPageState extends State<RewardsPage> {
           Expanded(
             flex: 1,
             child: Container(
-              padding: const EdgeInsets.all(Spacing.m),
-              margin: const EdgeInsets.only(top: Spacing.m),
+              padding: EdgeInsets.all(Spacing.m),
+              margin: EdgeInsets.only(top: Spacing.m),
               decoration: BoxDecoration(
                   color: ColorPalette.grey50,
                   shape: BoxShape.rectangle,
@@ -224,24 +224,31 @@ class _RewardsPageState extends State<RewardsPage> {
   Widget _pointsContainer({int points}) => Row(
         children: [
           Expanded(
-              flex: 1,
-              child: Container(
-                  padding: const EdgeInsets.all(Spacing.m),
-                  margin: const EdgeInsets.only(top: Spacing.m),
-                  decoration: BoxDecoration(
-                      color: ColorPalette.grey50,
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.all(Radius.circular(8))),
-                  child: Text(
-                    "$points pontos",
-                    textAlign: TextAlign.center,
-                    textScaleFactor: 1.4,
-                  ).h1(color: ColorPalette.black100))),
+            flex: 1,
+            child: Container(
+              padding: EdgeInsets.all(Spacing.m),
+              margin: EdgeInsets.only(top: Spacing.m),
+              decoration: BoxDecoration(
+                  color: ColorPalette.grey50,
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.all(Radius.circular(8))),
+              child: Text(
+                "$points pontos",
+                textAlign: TextAlign.center,
+                textScaleFactor: 1.4,
+              ).h1(color: ColorPalette.black100),
+            ),
+          ),
+          Stack(
+            children: <Widget>[
+              Image(image: AssetImage(imgGuy)),
+            ],
+          ),
         ],
       );
 
   Widget _profileContainer(Map<String, dynamic> trucker) => Container(
-        padding: const EdgeInsets.only(top: Spacing.l),
+        padding: EdgeInsets.only(top: Spacing.l),
         child: Row(
           children: [
             RoundImage(
