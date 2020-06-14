@@ -56,7 +56,11 @@ class RoundImage extends StatelessWidget {
                   color: ColorPalette.red50,
                   shape: BoxShape.circle,
                 ),
-                child: Image(image: AssetImage(customBadge ?? iconCrown)),
+                child: Image(
+                  image: AssetImage(
+                    customBadge.isEmpty ? iconCrown : customBadge,
+                  ),
+                ),
               ),
             ),
           ),
