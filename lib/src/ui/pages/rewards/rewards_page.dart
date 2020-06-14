@@ -46,13 +46,8 @@ class _RewardsPageState extends State<RewardsPage> {
 
   Widget _buildBody() {
     return SafeArea(
-      top: false,
       child: Column(
         children: [
-          Container(
-            height: 50.0,
-            color: ColorPalette.overlay50,
-          ),
           Expanded(
             child: SingleChildScrollView(
               child: Column(
