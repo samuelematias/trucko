@@ -182,6 +182,7 @@ class _CompaniesDetailPageState extends State<CompaniesDetailPage> {
                   _buildTruckersAroundList(truckersAround),
                   _buildInformationBoxList(),
                   _buildAboutCampaign(),
+                  _buildButtons(),
                 ],
               ),
             ),
@@ -352,4 +353,26 @@ class _CompaniesDetailPageState extends State<CompaniesDetailPage> {
       ),
     );
   }
+
+  Widget _buildButtons() => Padding(
+        padding: EdgeInsets.only(
+          left: Spacing.mms,
+          right: Spacing.mms,
+          bottom: Spacing.ms,
+        ),
+        child: Column(
+          children: <Widget>[
+            SecondaryButton(
+              label: 'COMPARTILHAR',
+              onPressed: () {},
+              iconLeft: iconWhatsapp,
+              showIconLeft: true,
+            ),
+            SizedBox(
+              height: 12.0,
+            ),
+            PrimaryButton(label: 'RESGATAR', onPressed: () {})
+          ],
+        ),
+      );
 }
