@@ -1,0 +1,20 @@
+{
+	"terminal.integrated.shell.osx": "/bin/zsh",
+	//copy-paste
+	"terminal.integrated.rendererType": "dom",
+	"editor.fontLigatures": true,
+	"window.title": "${activeEditorLong}${separator}${rootName}",
+	"extensions.ignoreRecommendations": true,
+	"editor.formatOnSave": true,
+	"files.autoSave": "onFocusChange",
+	"editor.codeLens": true,
+	"window.zoomLevel": 0,
+	"terminal.integrated.shellArgs.osx": ["-l"],
+	"prettier.singleQuote": true,
+	"prettier.useTabs": true,
+	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"todo-tree.tree.showScanModeButton": false,
+	"launch": {}
+}
