@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:trucko/src/core/constants/assets/assets.dart';
+import 'package:trucko/src/ui/pages/local/local_detail_page.dart';
 
 class MapsPage extends StatefulWidget {
   @override
@@ -8,8 +10,22 @@ class MapsPage extends StatefulWidget {
 class _MapsPageState extends State<MapsPage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text('Maps'),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Center(
+          child: InkResponse(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LocalDetailPage()),
+            ),
+            child: Image(
+              image: AssetImage(imgTrucko),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
