@@ -12,3 +12,4 @@ const String iconLocationGreen = '${PREFIX}icons/icon-location-green.png';
 const String iconLocationBlue = '${PREFIX}icons/icon-location-blue.png';
 const String iconOk = '${PREFIX}icons/icon-ok.png';
 const String iconGiftRed = '${PREFIX}icons/icon-gift-red.png';
+const String iconWhatsapp = '${PREFIX}icons/icon-whatsapp.png';
