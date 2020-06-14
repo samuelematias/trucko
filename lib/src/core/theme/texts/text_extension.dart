@@ -146,34 +146,6 @@ extension TextExtension on Text {
   Text t1({
     Color color = ColorPalette.grey300,
     double fontSize = 10.0,
-    FontWeight fontWeight = FontWeight.normal,
-  }) {
-    return Text(
-      data,
-      key: key,
-      locale: locale,
-      maxLines: maxLines,
-      overflow: overflow,
-      semanticsLabel: semanticsLabel,
-      softWrap: softWrap,
-      strutStyle: strutStyle,
-      textAlign: textAlign,
-      textDirection: textDirection,
-      textScaleFactor: textScaleFactor,
-      textWidthBasis: textWidthBasis,
-      style: GoogleFonts.nunito(
-        textStyle: TextStyle(
-          color: color,
-          fontSize: fontSize,
-          fontWeight: fontWeight,
-        ),
-      ),
-    );
-  }
-
-  Text t2({
-    Color color = ColorPalette.black50,
-    double fontSize = 10.0,
     FontWeight fontWeight = FontWeight.bold,
   }) {
     return Text(
