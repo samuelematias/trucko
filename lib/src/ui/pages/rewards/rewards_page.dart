@@ -244,6 +244,7 @@ class _RewardsPageState extends State<RewardsPage> {
               width: 64.0,
               height: 64.0,
               badgeScale: 3,
+              customBadge: iconCrownBig,
               showBadge: trucker["crown"],
               imageUrl: trucker["photo"],
             ),
