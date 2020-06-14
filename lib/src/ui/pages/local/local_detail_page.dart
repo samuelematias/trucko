@@ -161,17 +161,33 @@ class _LocalDetailPageState extends State<LocalDetailPage> {
   ) {
     final bool isTheFirstPositionOfArray = index == 0;
     final bool isTheLastPositionOfArray = index + 1 == truckersAround.length;
-    return Padding(
-      padding: EdgeInsets.only(
-        left: isTheFirstPositionOfArray ? Spacing.l : 0.0,
-        right: isTheLastPositionOfArray ? Spacing.l : Spacing.s,
-      ),
-      child: RoundImage(
-        borderColor: ColorPalette.green50,
-        widthBorderImage: 3,
-        imageUrl: trucker['photo'],
-        showBadge: trucker['crown'],
-      ),
+    return Row(
+      children: [
+        Padding(
+          padding: EdgeInsets.only(
+            left: isTheFirstPositionOfArray ? Spacing.l : 0.0,
+            right: Spacing.s,
+          ),
+          child: RoundImage(
+            borderColor: ColorPalette.green50,
+            widthBorderImage: 3,
+            imageUrl: trucker['photo'],
+            showBadge: trucker['crown'],
+          ),
+        ),
+        Visibility(
+          visible: isTheLastPositionOfArray,
+          child: Padding(
+            padding: EdgeInsets.only(
+              left: isTheFirstPositionOfArray ? Spacing.l : 0.0,
+              right: isTheLastPositionOfArray ? Spacing.l : Spacing.s,
+            ),
+            child: More(
+              count: '2',
+            ),
+          ),
+        )
+      ],
     );
   }
 }
