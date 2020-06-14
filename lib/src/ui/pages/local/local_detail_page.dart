@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trucko/src/core/constants/assets/assets.dart';
+import 'package:trucko/src/core/routing/routes.dart';
+import 'package:trucko/src/core/routing/screen_argumentos.dart';
 import 'package:trucko/src/core/theme/theme.dart';
 import 'package:trucko/src/ui/widgets/widgets.dart';
 
@@ -9,6 +11,10 @@ class LocalDetailPage extends StatefulWidget {
 }
 
 class _LocalDetailPageState extends State<LocalDetailPage> {
+  static final CompaniesDetailPageArguments arguments1 =
+      CompaniesDetailPageArguments(value: 1);
+  static final CompaniesDetailPageArguments arguments2 =
+      CompaniesDetailPageArguments(value: 2);
   final List<Map<String, dynamic>> truckersAround = [
     {
       "name": "Samuel",
@@ -58,10 +64,12 @@ class _LocalDetailPageState extends State<LocalDetailPage> {
     {
       "photo": imgCompanies1,
       "id": "6d579be3-68b8-454f-9a5f-f7b3aaed1a0f",
+      "arguments": arguments2,
     },
     {
       "photo": imgCompanies2,
       "id": "6d579be3-68b8-454f-9a5f-f7b3aaed1a0a",
+      "arguments": arguments1,
     },
   ];
 
@@ -275,7 +283,14 @@ class _LocalDetailPageState extends State<LocalDetailPage> {
             padding: EdgeInsets.only(
               top: Spacing.mms,
             ),
-            child: PrimaryButton(label: 'VER MAIS', onPressed: () {}),
+            child: PrimaryButton(
+              label: 'VER MAIS',
+              onPressed: () => Navigator.pushNamed(
+                context,
+                AppTabNavigatorRoutes.companiesDetail,
+                arguments: companie['arguments'],
+              ),
+            ),
           )
         ],
       ),
@@ -319,7 +334,7 @@ class _LocalDetailPageState extends State<LocalDetailPage> {
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                 ),
                 child: Image(
-                  image: AssetImage(iconLocation),
+                  image: AssetImage(iconLocationGreen),
                   alignment: Alignment.center,
                 ),
               ),
