@@ -20,7 +20,7 @@ class _RewardsPageState extends State<RewardsPage> {
 
   final List<Map<String, Object>> rewards = [
     {
-      "category": "Combustivel",
+      "category": "Combustível",
       "items": [
         {"id": "1", "points": 100, "img": imgCompanies1},
         {"id": "2", "points": 80, "img": imgCompanies1},
@@ -65,21 +65,26 @@ class _RewardsPageState extends State<RewardsPage> {
                       ],
                     ),
                   ),
-                  Padding(
-                      padding: EdgeInsets.only(
-                        left: Spacing.m,
-                        right: Spacing.m,
+                  Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: Spacing.m,
+                          right: Spacing.m,
+                        ),
+                        child: Column(
+                          children: [
+                            _profileContainer(trucker),
+                            _pointsContainer(points: trucker["points"]),
+                            _whatsContainer(),
+                            _buildRewardsTitle(),
+                          ],
+                        ),
                       ),
-                      child: Column(
-                        children: [
-                          _profileContainer(trucker),
-                          _pointsContainer(points: trucker["points"]),
-                          _whatsContainer(),
-                          _buildRewardsTitle(),
-                          _buildCompanies(rewards[0]),
-                          _buildCompanies(rewards[1])
-                        ],
-                      ))
+                      _buildCompanies(rewards[0]),
+                      _buildCompanies(rewards[1])
+                    ],
+                  )
                 ],
               ),
             ),
@@ -103,7 +108,7 @@ class _RewardsPageState extends State<RewardsPage> {
           Container(
             alignment: Alignment.centerLeft,
             padding: EdgeInsets.fromLTRB(
-              0,
+              Spacing.m,
               Spacing.mms,
               Spacing.mms,
               Spacing.m,
@@ -146,6 +151,7 @@ class _RewardsPageState extends State<RewardsPage> {
     return Padding(
       padding: EdgeInsets.only(
         right: Spacing.m,
+        left: Spacing.m,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -203,7 +209,7 @@ class _RewardsPageState extends State<RewardsPage> {
                   Text(
                     "Convide seus amigos caminhoneiros e ganhe muitos pontos!",
                     textAlign: TextAlign.left,
-                  ).p1(color: ColorPalette.black100)
+                  ).p1(color: ColorPalette.black100),
                 ],
               ),
             ),
