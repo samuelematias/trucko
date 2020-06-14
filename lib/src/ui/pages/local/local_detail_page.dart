@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trucko/src/core/constants/assets/assets.dart';
 import 'package:trucko/src/core/theme/theme.dart';
 import 'package:trucko/src/ui/widgets/widgets.dart';
 
@@ -52,6 +53,18 @@ class _LocalDetailPageState extends State<LocalDetailPage> {
       "crown": false,
     },
   ];
+
+  final List<Map<String, dynamic>> companies = [
+    {
+      "photo": imgCompanies1,
+      "id": "6d579be3-68b8-454f-9a5f-f7b3aaed1a0f",
+    },
+    {
+      "photo": imgCompanies2,
+      "id": "6d579be3-68b8-454f-9a5f-f7b3aaed1a0a",
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,26 +81,34 @@ class _LocalDetailPageState extends State<LocalDetailPage> {
             height: 50.0,
             color: ColorPalette.overlay50,
           ),
-          SingleChildScrollView(
-            child: Column(
+          Padding(
+            padding: EdgeInsets.only(
+              top: Spacing.ss,
+              right: Spacing.m,
+              bottom: Spacing.m,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: Spacing.m,
-                    right: Spacing.m,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      _buildCloseButton(),
-                    ],
-                  ),
-                ),
-                _buildLogo(),
-                _buildLocalName(),
-                _buildAlertTruckersAround(count: 4),
-                _buildTruckersAroundList(truckersAround),
+                _buildCloseButton(),
               ],
+            ),
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  _buildLogo(),
+                  _buildLocalName(),
+                  _buildAlertTruckersAround(count: 4),
+                  _buildTruckersAroundList(truckersAround),
+                  _buildCompanies(),
+                  _buildDivider(),
+                  _buildAddress(),
+                  _buildRatingList(),
+                  _buildButtons(),
+                ],
+              ),
             ),
           )
         ],
@@ -104,7 +125,6 @@ class _LocalDetailPageState extends State<LocalDetailPage> {
             shape: BoxShape.circle,
             border: Border.all(color: ColorPalette.grey400, width: 1.0),
           ),
-          // child: Icon(Icons.close),),
           child: Icon(Icons.close, size: 24.0),
         ),
       );
@@ -190,4 +210,271 @@ class _LocalDetailPageState extends State<LocalDetailPage> {
       ],
     );
   }
+
+  Widget _buildCompanies() => Column(
+        children: <Widget>[
+          Container(
+            alignment: Alignment.centerLeft,
+            padding: EdgeInsets.fromLTRB(
+              Spacing.mms,
+              Spacing.mms,
+              Spacing.mms,
+              Spacing.m,
+            ),
+            child: Text(
+              'Campanhas ativas',
+              textAlign: TextAlign.left,
+            ).h2(),
+          ),
+          Row(
+            children: [
+              _buildCompaniesList(),
+            ],
+          ),
+        ],
+      );
+
+  Widget _buildCompaniesList() => Container(
+        height: 220.0,
+        child: ListView.builder(
+          shrinkWrap: true,
+          scrollDirection: Axis.horizontal,
+          itemCount: companies.length,
+          itemBuilder: (BuildContext context, int index) {
+            final companie = companies.elementAt(index);
+            return Container(
+                alignment: Alignment.centerLeft,
+                child: _buildCompaniesListItem(companie, companies, index));
+          },
+        ),
+      );
+
+  Widget _buildCompaniesListItem(
+    Map<String, dynamic> companie,
+    List<Map<String, dynamic>> companies,
+    int index,
+  ) {
+    final bool isTheFirstPositionOfArray = index == 0;
+    final bool isTheLastPositionOfArray = index + 1 == companies.length;
+    return Padding(
+      padding: EdgeInsets.only(
+        left: isTheFirstPositionOfArray ? Spacing.l : 0.0,
+        right: isTheLastPositionOfArray ? Spacing.l : Spacing.m,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            child: Image(
+              image: AssetImage(companie['photo']),
+            ),
+          ),
+          Container(
+            width: 140.0,
+            padding: EdgeInsets.only(
+              top: Spacing.mms,
+            ),
+            child: PrimaryButton(label: 'VER MAIS', onPressed: () {}),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDivider() => Padding(
+        padding: EdgeInsets.fromLTRB(
+          Spacing.mms,
+          Spacing.l,
+          Spacing.mms,
+          Spacing.mms,
+        ),
+        child: Divider(
+          color: ColorPalette.grey400,
+          height: 1.0,
+          thickness: 1.0,
+        ),
+      );
+
+  Widget _buildAddress() => Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: Spacing.mms,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Flexible(
+              child: Text(
+                      'Av. Visc. de Albuquerque, 964 - Madalena, Recife - PE, 50610-090')
+                  .p2(color: ColorPalette.grey100),
+            ),
+            InkResponse(
+              onTap: () {},
+              child: Container(
+                width: 48.0,
+                height: 48.0,
+                decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  border: Border.all(color: ColorPalette.green50, width: 2),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                ),
+                child: Image(
+                  image: AssetImage(iconLocation),
+                  alignment: Alignment.center,
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+
+  Widget _buildRatingList() => Padding(
+        padding: EdgeInsets.all(Spacing.mms),
+        child: Column(
+          children: <Widget>[
+            _buildRatingFood(),
+            _buildRatingBathroom(),
+            _buildRatingParking(),
+          ],
+        ),
+      );
+
+  Widget _buildRatingFood() => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Text(
+            'Comida',
+          ).p2(color: ColorPalette.grey200),
+          Row(
+            children: <Widget>[
+              Icon(
+                Icons.star,
+                color: ColorPalette.red50,
+                size: 12,
+              ),
+              Icon(
+                Icons.star,
+                color: ColorPalette.red50,
+                size: 12,
+              ),
+              Icon(
+                Icons.star,
+                color: ColorPalette.red50,
+                size: 12,
+              ),
+              Icon(
+                Icons.star,
+                color: ColorPalette.red50,
+                size: 12,
+              ),
+              Icon(
+                Icons.star,
+                color: ColorPalette.red50,
+                size: 12,
+              ),
+            ],
+          )
+        ],
+      );
+
+  Widget _buildRatingBathroom() => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Text(
+            'Banheiro',
+          ).p2(color: ColorPalette.grey200),
+          Row(
+            children: <Widget>[
+              Icon(
+                Icons.star,
+                color: ColorPalette.red50,
+                size: 12,
+              ),
+              Icon(
+                Icons.star,
+                color: ColorPalette.red50,
+                size: 12,
+              ),
+              Icon(
+                Icons.star,
+                color: ColorPalette.grey400,
+                size: 12,
+              ),
+              Icon(
+                Icons.star,
+                color: ColorPalette.grey400,
+                size: 12,
+              ),
+              Icon(
+                Icons.star,
+                color: ColorPalette.grey400,
+                size: 12,
+              ),
+            ],
+          )
+        ],
+      );
+
+  Widget _buildRatingParking() => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Text(
+            'Estacionamento',
+          ).p2(color: ColorPalette.grey200),
+          Row(
+            children: <Widget>[
+              Icon(
+                Icons.star,
+                color: ColorPalette.red50,
+                size: 12,
+              ),
+              Icon(
+                Icons.star,
+                color: ColorPalette.red50,
+                size: 12,
+              ),
+              Icon(
+                Icons.star,
+                color: ColorPalette.grey400,
+                size: 12,
+              ),
+              Icon(
+                Icons.star,
+                color: ColorPalette.grey400,
+                size: 12,
+              ),
+              Icon(
+                Icons.star,
+                color: ColorPalette.grey400,
+                size: 12,
+              ),
+            ],
+          )
+        ],
+      );
+
+  Widget _buildButtons() => Padding(
+        padding: EdgeInsets.only(
+          left: Spacing.mms,
+          right: Spacing.mms,
+          bottom: Spacing.mms,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            InkResponse(
+              onTap: () {},
+              child: Text(
+                'Ver mais',
+              ).p2(color: ColorPalette.green50, fontWeight: FontWeight.bold),
+            ),
+            InkResponse(
+              onTap: () {},
+              child: Text(
+                'Avalidar',
+              ).p2(color: ColorPalette.green50, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+      );
 }
