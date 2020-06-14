@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trucko/src/core/constants/assets/assets.dart';
-import 'package:trucko/src/ui/pages/local/local_detail_page.dart';
+import 'package:trucko/src/core/routing/routes.dart';
 
 class MapsPage extends StatefulWidget {
   @override
@@ -16,10 +16,8 @@ class _MapsPageState extends State<MapsPage> {
       children: [
         Center(
           child: InkResponse(
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => LocalDetailPage()),
-            ),
+            onTap: () =>
+                Navigator.pushNamed(context, AppTabNavigatorRoutes.localDetail),
             child: Image(
               image: AssetImage(imgTrucko),
             ),

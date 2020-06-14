@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:trucko/src/core/routing/routes.dart';
+import 'package:trucko/src/ui/pages/local/local_detail_page.dart';
 import 'package:trucko/src/ui/pages/login/login_page.dart';
 
 void main() {
@@ -29,6 +32,16 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: LoginPage(),
+      onGenerateRoute: (settings) {
+        switch (settings.name) {
+          case AppTabNavigatorRoutes.localDetail:
+            return PageTransition(
+                child: LocalDetailPage(), type: PageTransitionType.downToUp);
+            break;
+          default:
+            return null;
+        }
+      },
     );
   }
 }
