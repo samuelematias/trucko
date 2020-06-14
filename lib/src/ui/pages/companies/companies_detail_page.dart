@@ -364,7 +364,7 @@ class _CompaniesDetailPageState extends State<CompaniesDetailPage> {
           children: <Widget>[
             SecondaryButton(
               label: 'COMPARTILHAR',
-              onPressed: () {},
+              onPressed: () => _buildBuyByCode(),
               iconLeft: iconWhatsapp,
               showIconLeft: true,
             ),
@@ -417,13 +417,39 @@ class _CompaniesDetailPageState extends State<CompaniesDetailPage> {
                     child: _buildCompanyLogo(),
                   ),
                   Text(
-                    '${campaign[0]["title"]}aaa',
+                    '${campaign[0]["title"]}',
                     textAlign: TextAlign.center,
                   ).h2(),
                 ],
               ),
               PrimaryButton(
                   label: 'RESGATAR', onPressed: () => Navigator.pop(context)),
+              Text('CANCELAR').h2(color: ColorPalette.grey100),
+            ],
+          ),
+        ),
+      );
+
+  void _buildBuyByCode() => _showModalBottomSheet(
+        child: Padding(
+          padding: EdgeInsets.only(
+            left: Spacing.mms,
+            right: Spacing.mms,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(
+                  bottom: Spacing.mms,
+                ),
+                child: Text(
+                  'Gastar 100 pontos para resgatar cupom de R\$200 reais de combustível no posto Ipiranga?',
+                  textAlign: TextAlign.center,
+                ).p1(fontWeight: FontWeight.bold),
+              ),
+              PrimaryButton(
+                  label: 'COMPRAR', onPressed: () => Navigator.pop(context)),
               Text('CANCELAR').h2(color: ColorPalette.grey100),
             ],
           ),
