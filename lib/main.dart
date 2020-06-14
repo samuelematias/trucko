@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trucko/src/core/theme/theme.dart';
 
 void main() {
   runApp(MyApp());
@@ -48,7 +49,8 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Text(
               'You have pushed the button this many times:',
-            ),
+            ).h1(
+                color: Colors.red, fontSize: 18, fontWeight: FontWeight.normal),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
