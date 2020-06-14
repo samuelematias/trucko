@@ -20,19 +20,19 @@ class _RewardsPageState extends State<RewardsPage> {
 
   final List<Map<String, Object>> rewards = [
     {
-      "category": "Combust[ivel",
+      "category": "Combustivel",
       "items": [
-        {"id": "1", "points": 100, "img": "https://i.imgur.com/4kGRWdN.jpg"},
-        {"id": "2", "points": 80, "img": "https://i.imgur.com/4kGRWdN.jpg"},
-        {"id": "3", "points": 100, "img": "https://i.imgur.com/4kGRWdN.jpg"}
+        {"id": "1", "points": 100, "img": imgCompanies1},
+        {"id": "2", "points": 80, "img": imgCompanies1},
+        {"id": "3", "points": 100, "img": imgCompanies1}
       ]
     },
     {
       "category": "Mecânico e autopeças",
       "items": [
-        {"id": "4", "points": 100, "img": "https://i.imgur.com/4kGRWdN.jpg"},
-        {"id": "5", "points": 100, "img": "https://i.imgur.com/4kGRWdN.jpg"},
-        {"id": "6", "points": 100, "img": "https://i.imgur.com/4kGRWdN.jpg"}
+        {"id": "4", "points": 100, "img": imgCompanies1},
+        {"id": "5", "points": 100, "img": imgCompanies1},
+        {"id": "6", "points": 100, "img": imgCompanies1}
       ]
     }
   ];
@@ -53,36 +53,40 @@ class _RewardsPageState extends State<RewardsPage> {
             height: 50.0,
             color: ColorPalette.overlay50,
           ),
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: Spacing.m,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage(imgTrucko),
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Padding(
                     padding: EdgeInsets.only(
-                      left: Spacing.m,
-                      right: Spacing.m,
+                      top: Spacing.m,
                     ),
-                    child: Column(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        _profileContainer(trucker),
-                        _pointsContainer(points: trucker["points"]),
-                        _whatsContainer(),
-                        _buildRewards(rewards)
+                        Image(
+                          image: AssetImage(imgTrucko),
+                        )
                       ],
-                    ))
-              ],
+                    ),
+                  ),
+                  Padding(
+                      padding: EdgeInsets.only(
+                        left: Spacing.m,
+                        right: Spacing.m,
+                      ),
+                      child: Column(
+                        children: [
+                          _profileContainer(trucker),
+                          _pointsContainer(points: trucker["points"]),
+                          _whatsContainer(),
+                          _buildRewardsTitle(),
+                          _buildCompanies(rewards[0]),
+                          _buildCompanies(rewards[1])
+                        ],
+                      ))
+                ],
+              ),
             ),
           )
         ],
@@ -90,8 +94,102 @@ class _RewardsPageState extends State<RewardsPage> {
     );
   }
 
-  Widget _buildRewards(List<Map<String, Object>> rewards) =>
-      Text("Benefícios disponíveis").h2(color: ColorPalette.black100);
+  Widget _buildRewardsTitle() => Container(
+      margin: const EdgeInsets.only(top: Spacing.l),
+      alignment: Alignment.centerLeft,
+      child: Text(
+        "Benefícios disponíveis",
+        textAlign: TextAlign.left,
+      ).h2(color: ColorPalette.black100));
+
+  Widget _buildCompanies(Map<String, dynamic> rewards) => Column(
+        children: <Widget>[
+          Container(
+            alignment: Alignment.centerLeft,
+            padding: EdgeInsets.fromLTRB(
+              0,
+              Spacing.mms,
+              Spacing.mms,
+              Spacing.m,
+            ),
+            child: Text(
+              '${rewards["category"]}',
+            ).p1(),
+          ),
+          Row(
+            children: [
+              _buildCompaniesList(rewards["items"]),
+            ],
+          ),
+        ],
+      );
+
+  Widget _buildCompaniesList(List<Map<String, dynamic>> rewardsList) =>
+      Expanded(
+        child: Container(
+          height: 220.0,
+          child: ListView.builder(
+            shrinkWrap: true,
+            scrollDirection: Axis.horizontal,
+            itemCount: rewardsList.length,
+            itemBuilder: (BuildContext context, int index) {
+              final reward = rewardsList.elementAt(index);
+              return Container(
+                  alignment: Alignment.centerLeft,
+                  child: _buildCompaniesListItem(reward, rewardsList, index));
+            },
+          ),
+        ),
+      );
+
+  Widget _buildCompaniesListItem(
+    Map<String, dynamic> reward,
+    List<Map<String, dynamic>> rewardsList,
+    int index,
+  ) {
+    return Padding(
+      padding: EdgeInsets.only(
+        right: Spacing.m,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Stack(
+            children: [
+              Container(
+                child: Image(
+                  image: AssetImage(reward['img']),
+                ),
+              ),
+              Positioned(
+                  left: 8,
+                  top: 8,
+                  child: Container(
+                      padding: EdgeInsets.all(
+                        Spacing.s,
+                      ),
+                      decoration: BoxDecoration(
+                          color: ColorPalette.grey50,
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.all(Radius.circular(8))),
+                      child: Text(
+                        "${reward["points"]} pts",
+                        textAlign: TextAlign.center,
+                      ).h2(color: ColorPalette.black100))),
+            ],
+          ),
+          Container(
+            width: 140.0,
+            padding: EdgeInsets.only(
+              top: Spacing.mms,
+            ),
+            child: PrimaryButton(label: 'COMPRAR', onPressed: () {}),
+          )
+        ],
+      ),
+    );
+  }
 
   Widget _whatsContainer() => Row(
         children: [
@@ -104,10 +202,14 @@ class _RewardsPageState extends State<RewardsPage> {
                       color: ColorPalette.grey50,
                       shape: BoxShape.rectangle,
                       borderRadius: BorderRadius.all(Radius.circular(8))),
-                  child: Text(
-                    "Convide seus amigos caminhoneiros e ganhe muitos pontos!",
-                    textAlign: TextAlign.left,
-                  ).p1(color: ColorPalette.black100))),
+                  child: Column(
+                    children: [
+                      Text(
+                        "Convide seus amigos caminhoneiros e ganhe muitos pontos!",
+                        textAlign: TextAlign.left,
+                      ).p1(color: ColorPalette.black100)
+                    ],
+                  ))),
         ],
       );
 
@@ -146,20 +248,19 @@ class _RewardsPageState extends State<RewardsPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(
-                      left: Spacing.m,
-                    ),
-                    child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Column(children: [
-                          Text("${trucker["name"]}")
-                              .h1(color: ColorPalette.black100),
-                          Visibility(
-                              visible: trucker["crown"],
-                              child: Text("Embaixador ${trucker["level"]}")
-                                  .p1(color: ColorPalette.red100))
-                        ])),
-                  )
+                      padding: EdgeInsets.only(
+                        left: Spacing.l,
+                      ),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("${trucker["name"]}")
+                                .h1(color: ColorPalette.black100),
+                            Visibility(
+                                visible: trucker["crown"],
+                                child: Text("Embaixador ${trucker["level"]}")
+                                    .h2(color: ColorPalette.red100))
+                          ])),
                 ],
               ),
             ),
