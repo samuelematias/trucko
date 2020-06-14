@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trucko/src/core/constants/assets/images.dart';
 import 'package:trucko/src/core/theme/theme.dart';
-import 'package:trucko/src/ui/widgets/tab_bar/bottom_tab_bar_controller.dart';
 import 'package:trucko/src/ui/widgets/widgets.dart';
 
 class LoginPage extends StatefulWidget {

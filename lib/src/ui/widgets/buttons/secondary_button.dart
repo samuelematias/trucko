@@ -8,6 +8,8 @@ class SecondaryButton extends StatelessWidget {
   final VoidCallback onPressed;
   final bool disabled;
   final bool isKeyboardVisible;
+  final String iconLeft;
+  final bool showIconLeft;
 
   const SecondaryButton({
     @required this.label,
@@ -15,6 +17,8 @@ class SecondaryButton extends StatelessWidget {
     this.loading = false,
     this.disabled = false,
     this.isKeyboardVisible = false,
+    this.iconLeft,
+    this.showIconLeft = false,
   });
 
   @override
@@ -38,13 +42,25 @@ class SecondaryButton extends StatelessWidget {
             ? CustomProgressIndicator(
                 valueColor: ColorPalette.green50,
               )
-            : Text(
-                label,
-                textAlign: TextAlign.center,
-              ).b1(
-                color: disabled || onPressed == null
-                    ? ColorPalette.grey200
-                    : ColorPalette.green50,
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Visibility(
+                    visible: showIconLeft,
+                    child: Padding(
+                      padding: EdgeInsets.only(right: Spacing.s),
+                      child: Image(image: AssetImage(iconLeft)),
+                    ),
+                  ),
+                  Text(
+                    label,
+                    textAlign: TextAlign.center,
+                  ).b1(
+                    color: disabled || onPressed == null
+                        ? ColorPalette.grey200
+                        : ColorPalette.green50,
+                  ),
+                ],
               ),
       ),
     );
