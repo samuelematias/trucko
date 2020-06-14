@@ -30,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: Spacing.xl),
-                child: PrimaryButton(
+                child: ShadowButton(
                   label: 'ENTRAR COM FACEBOOK',
                   onPressed: () => Navigator.push(
                     context,

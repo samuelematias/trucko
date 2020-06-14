@@ -3,16 +3,14 @@ import 'package:trucko/src/core/theme/theme.dart';
 import 'package:trucko/src/ui/widgets/loading/custom_progress_indicator.dart';
 
 class SecondaryButton extends StatelessWidget {
-  final String labelLeft;
-  final String labelRight;
+  final String label;
   final bool loading;
   final VoidCallback onPressed;
   final bool disabled;
   final bool isKeyboardVisible;
 
   const SecondaryButton({
-    @required this.labelLeft,
-    @required this.labelRight,
+    @required this.label,
     @required this.onPressed,
     this.loading = false,
     this.disabled = false,
@@ -21,10 +19,13 @@ class SecondaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
+    return OutlineButton(
+      borderSide: BorderSide(color: ColorPalette.green50, width: 2),
+      highlightedBorderColor: ColorPalette.green50,
+      disabledBorderColor:
+          loading ? ColorPalette.green50 : ColorPalette.grey100,
       onPressed: !disabled && !loading ? onPressed : null,
-      color: ColorPalette.green50,
-      disabledColor: loading ? ColorPalette.green50 : ColorPalette.grey50,
+      color: ColorPalette.white50,
       shape: RoundedRectangleBorder(
         borderRadius: isKeyboardVisible
             ? BorderRadius.circular(0.0)
@@ -34,28 +35,16 @@ class SecondaryButton extends StatelessWidget {
         height: 50.0,
         alignment: Alignment.center,
         child: loading
-            ? CustomProgressIndicator()
-            : Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    labelLeft,
-                    textAlign: TextAlign.center,
-                  ).b1(
-                    color: disabled || onPressed == null
-                        ? ColorPalette.grey200
-                        : ColorPalette.white50,
-                  ),
-                  Text(
-                    labelRight,
-                    textAlign: TextAlign.center,
-                  ).b1(
-                    color: disabled || onPressed == null
-                        ? ColorPalette.grey200
-                        : ColorPalette.white50,
-                    fontWeight: FontWeight.normal,
-                  ),
-                ],
+            ? CustomProgressIndicator(
+                valueColor: ColorPalette.green50,
+              )
+            : Text(
+                label,
+                textAlign: TextAlign.center,
+              ).b1(
+                color: disabled || onPressed == null
+                    ? ColorPalette.grey200
+                    : ColorPalette.green50,
               ),
       ),
     );
