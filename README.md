@@ -1,6 +1,6 @@
 # trucko
 
-A new Flutter project.
+A new Flutter project (`Flutter 1.20.0-1.0.pre.42 • channel master •`).
 
 ## Getting Started
 
