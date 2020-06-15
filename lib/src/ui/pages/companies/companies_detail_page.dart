@@ -371,8 +371,64 @@ class _CompaniesDetailPageState extends State<CompaniesDetailPage> {
             SizedBox(
               height: 12.0,
             ),
-            PrimaryButton(label: 'RESGATAR', onPressed: () {})
+            PrimaryButton(
+                label: 'RESGATAR', onPressed: () => _buildRedeemCode())
           ],
+        ),
+      );
+
+  Widget _buildCompanyLogo() => RoundImage(
+        width: 80.0,
+        height: 80.0,
+        imageUrl:
+            'https://lh3.googleusercontent.com/proxy/udNKxr0AEaZD6qSrZ7HUnYaHRkH7x38boN3Jzfmri851cJvL9B7MguksjBKuoMxZvtvH4GWgpUUXOGohtRnectXLoax1JJbJFNmSJbGW-was',
+      );
+
+  void _showModalBottomSheet({@required Widget child}) => showModalBottomSheet(
+        backgroundColor: ColorPalette.transparent,
+        context: context,
+        builder: (BuildContext context) => Container(
+          decoration: BoxDecoration(
+            color: ColorPalette.white50,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(8.0),
+              topRight: Radius.circular(8.0),
+            ),
+          ),
+          child: child,
+        ),
+      );
+
+  void _buildRedeemCode() => _showModalBottomSheet(
+        child: Padding(
+          padding: EdgeInsets.only(
+            left: Spacing.mms,
+            right: Spacing.mms,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Column(
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(
+                      bottom: Spacing.mms,
+                    ),
+                    child: _buildCompanyLogo(),
+                  ),
+                  Text(
+                    '${campaign[0]["title"]}',
+                    textAlign: TextAlign.center,
+                  ).h2(),
+                ],
+              ),
+              PrimaryButton(
+                  label: 'RESGATAR', onPressed: () => Navigator.pop(context)),
+              InkResponse(
+                  onTap: () => Navigator.pop(context),
+                  child: Text('CANCELAR').h2(color: ColorPalette.grey100)),
+            ],
+          ),
         ),
       );
 }
