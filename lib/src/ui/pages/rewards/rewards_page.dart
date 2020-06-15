@@ -186,7 +186,8 @@ class _RewardsPageState extends State<RewardsPage> {
             padding: EdgeInsets.only(
               top: Spacing.mms,
             ),
-            child: PrimaryButton(label: 'COMPRAR', onPressed: () {}),
+            child: PrimaryButton(
+                label: 'COMPRAR', onPressed: () => _buildBuyByCode()),
           )
         ],
       ),
@@ -281,6 +282,49 @@ class _RewardsPageState extends State<RewardsPage> {
               ),
             ),
           ],
+        ),
+      );
+
+  void _showModalBottomSheet({@required Widget child}) => showModalBottomSheet(
+        backgroundColor: ColorPalette.transparent,
+        context: context,
+        builder: (BuildContext context) => Container(
+          decoration: BoxDecoration(
+            color: ColorPalette.white50,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(8.0),
+              topRight: Radius.circular(8.0),
+            ),
+          ),
+          child: child,
+        ),
+      );
+
+  void _buildBuyByCode() => _showModalBottomSheet(
+        child: Padding(
+          padding: EdgeInsets.only(
+            left: Spacing.mms,
+            right: Spacing.mms,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(
+                  bottom: Spacing.mms,
+                ),
+                child: Text(
+                  'Gastar 100 pontos para resgatar cupom de R\$200 reais de combustível no posto Ipiranga?',
+                  textAlign: TextAlign.center,
+                ).p1(fontWeight: FontWeight.bold),
+              ),
+              PrimaryButton(
+                  label: 'COMPRAR', onPressed: () => Navigator.pop(context)),
+              InkResponse(
+                  onTap: () => Navigator.pop(context),
+                  child: Text('CANCELAR').h2(color: ColorPalette.grey100)),
+            ],
+          ),
         ),
       );
 }
