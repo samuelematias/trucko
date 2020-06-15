@@ -9,7 +9,9 @@ class RoundImage extends StatelessWidget {
   final Color borderColor;
   final double width;
   final double height;
+  final double badgeScale;
   final bool showBadge;
+  final String customBadge;
 
   const RoundImage({
     Key key,
@@ -19,6 +21,8 @@ class RoundImage extends StatelessWidget {
     this.widthBorderImage = 2.0,
     this.borderColor = ColorPalette.grey400,
     this.showBadge = false,
+    this.badgeScale = 2,
+    this.customBadge = '',
   }) : super(key: key);
 
   @override
@@ -46,14 +50,16 @@ class RoundImage extends StatelessWidget {
               right: 0,
               top: 0,
               child: Container(
-                width: 16.0,
-                height: 16.0,
+                width: 8.0 * badgeScale,
+                height: 8.0 * badgeScale,
                 decoration: BoxDecoration(
                   color: ColorPalette.red50,
                   shape: BoxShape.circle,
                 ),
                 child: Image(
-                  image: AssetImage(iconCrown),
+                  image: AssetImage(
+                    customBadge.isEmpty ? iconCrown : customBadge,
+                  ),
                 ),
               ),
             ),
