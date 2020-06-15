@@ -9,6 +9,8 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="trucko"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyDhxIwf0vsNdXPVh20cKyBgiswAzXMr9e4"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
